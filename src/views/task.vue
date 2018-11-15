@@ -15,7 +15,7 @@
                         </div>
 
                     </c:forEach> -->
-                    <div class="caption" align= "left" v-for="(item,key) in list" :key = key>
+                    <div class="caption" align= "left" v-for="item in list" :key = item.taskid>
                       <input type="checkbox" name="task" v-model="item.taskid" checked>
                        <span class="taskDescription">{{item.taskdescription}}</span>
                     </div>
@@ -27,13 +27,23 @@
             <div class="col-md-2"></div>
         </div>
     </div>
+</div>
 </template>
 <script>
 export default {
   name: 'task',
   data () {
     return {
-      list: []
+      list: [{
+        taskid: '1',
+        taskdescription: 'test1'
+      }, {
+        taskid: '2',
+        taskdescription: 'test2'
+      }, {
+        taskid: '3',
+        taskdescription: 'test3'
+      }]
       // 任务：${model.taskdescription}
     }
   }

@@ -1,5 +1,5 @@
 <template>
-<div class="beg-login-bg">
+  <div class="beg-login-bg">
     <div class="beg-login-box">
         <header>
             <h1>登录</h1>
@@ -32,6 +32,7 @@
 
                         <button type="submit" class="layui-btn " @click="submit" id="submitlogin">登录</button>
                     </div>
+                </div>
                 </form>
             </div>
         </div>
@@ -41,7 +42,7 @@
 <script>
 export default {
   name: 'login',
-  data() {
+  data () {
     return {
       msg: 'Welcome to Your Vue.js App',
       error: false,
