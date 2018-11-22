@@ -27,7 +27,7 @@ export default new Router({
       component: task
     },
     {
-      path: 'forgetPassword.html',
+      path: '/forgetPassword.html',
       name: 'forgetPassword',
       component: forgetPassword
     }

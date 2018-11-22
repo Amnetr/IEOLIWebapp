@@ -1,38 +1,5 @@
 <template>
-<<<<<<< Updated upstream
-    <div class="beg-login-bg">
-        <div class="beg-login-box">
-            <header>
-                <h1>登录</h1>
-            </header>
-            <div class="beg-login-main">
-                <form action="weblogin" class="layui-form" method="post">
-                    <div class="layui-form-item">
-                        <label class="beg-login-icon">
-                            <i class="layui-icon">&#xe612;</i>
-                        </label>
-                        <input type="text" name="username" lay-verify="username" autocomplete="off" placeholder="这里输入登录名" class="layui-input" maxlength="20">
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="beg-login-icon">
-                            <i class="layui-icon">&#xe642;</i>
-                        </label>
-                        <input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="这里输入密码" class="layui-input" maxlength="8">
-                        <font color="red" size="2">${Result }</font>
-                    </div>
-                    <div class="layui-form-item">
-                        <div class="form-group">
-                            <button onclick="window.location.href='page?path=forgetpassword' " type="button" class="layui-btn layui-btn-primary layui-btn-small btn-forget " name="forget" style="width:40%">忘记密码</button>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button onclick="window.location.href='page?path=signup' " type="button" class="layui-btn layui-btn-primary layui-btn-small btn-login " style="width:40%" name="login">用户注册</button>
-                        </div>
-                        <div class="form-group login" style="margin-top:5px;">
-
-                            <button type="submit" class="layui-btn btn-warning " name="submit" id="submitlogin">登录</button>
-                        </div>
-                        <div class="beg-clear"></div>
-=======
-<div class="beg-login-bg">
+  <div class="beg-login-bg">
     <div class="beg-login-box">
         <header>
             <h1>登录</h1>
@@ -61,10 +28,9 @@
                         <button  type="button" @click="signup"
                         class="layui-btn layui-btn-primary layui-btn-small btn-login ">用户注册</button>
                     </div>
+                </div>
                     <div class="form-group login">
-
                         <button type="submit" class="layui-btn " @click="submit" id="submitlogin">登录</button>
->>>>>>> Stashed changes
                     </div>
                 </form>
             </div>
@@ -75,7 +41,7 @@
 <script>
 export default {
   name: 'login',
-  data() {
+  data () {
     return {
       msg: 'Welcome to Your Vue.js App',
       error: false,
@@ -103,15 +69,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-<<<<<<< Updated upstream
-=======
 input {
   border-radius: 3px;
 }
 button {
   border-radius: 3px;
 }
->>>>>>> Stashed changes
 .beg-login-box {
   height: 350px;
 }
@@ -121,8 +84,6 @@ button {
 #app {
   height: 100%;
 }
-<<<<<<< Updated upstream
-=======
 #btnGroup {
   height: 35px;
 }
@@ -134,7 +95,6 @@ button {
   float: right;
   width: 40%;
 }
->>>>>>> Stashed changes
 .beg-login-bg {
   background-color: #393d49;
   height: 100%;

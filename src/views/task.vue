@@ -1,24 +1,4 @@
 <template>
-<<<<<<< Updated upstream
-    <div class="headline">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <div id="rectrangle"></div>
-                <h3 id="title">挑选任务进行标注&nbsp;&nbsp; </h3>
-                <div class="prepanel">
-                    <div class="panel-group" id="accordion">
-                        <c:forEach items="${list}" var="model" varStatus="status">
-                            <div class="caption" align="left">
-                                <input type="checkbox" name="task" value="${model.taskid}" checked>
-                                <span style="font-size:25px;margin-right:2px;margin-bottom:3px;backgroundColor:#EEEEEE">任务：${model.taskdescription}</span>
-                            </div>
-                        </c:forEach>
-                        <p align="center">
-                            <a onclick="settask()" target="_blank" class="btn btn-info" role="button">选择</a>
-                        </p>
-                    </div>
-=======
 <div class="headline">
     <div class="row">
         <div class="col-md-2"></div>
@@ -42,9 +22,9 @@
                     <p align="center">
                         <a onclick="settask()" target="_blank" class="btn btn-info" role="button">选择</a>
                     </p>
->>>>>>> Stashed changes
                 </div>
             </div>
+        </div>
             <div class="col-md-2"></div>
         </div>
     </div>
@@ -52,16 +32,12 @@
 <script>
 export default {
   name: 'task',
-<<<<<<< Updated upstream
-  data() {}
-=======
   data () {
     return {
       list: []
       // 任务：${model.taskdescription}
     }
   }
->>>>>>> Stashed changes
 }
 </script>
 <style scoped>
