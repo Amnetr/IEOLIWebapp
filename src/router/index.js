@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import login from '@/views/login'
 import task from '@/views/task'
 import forgetPassword from '@/views/forgetPassword'
+import signup from '@/views/signup'
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ export default new Router({
       path: '/forgetPassword.html',
       name: 'forgetPassword',
       component: forgetPassword
+    },
+    {
+      path: '/signup.html',
+      name: 'signup',
+      component: signup
     }
   ]
 })

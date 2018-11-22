@@ -31,18 +31,20 @@
          </div>
          <div class="layui-form-item">
             <div class ="form-group">
-            <button onclick=check() class="layui-btn " id="resure">确认</button>
+            <button @click="check" class="layui-btn " id="resure">确认</button>
           </div>
           <div class="beg-clear"></div>
          </div>
       </div>
     </div>
-    <span id="copyRight">@医患纠纷中的法律要素交互式提取系统</span>
+    <copyRight></copyRight>
   </div>
 </template>
 
 <script>
+import copyRight from '@/components/copyright'
 export default {
+  components: { copyRight },
   data () {
     return {
       id: 's',
@@ -133,12 +135,11 @@ export default {
 // }
 </script>
 <style>
-
-#mailAddress{
+#mailAddress {
   width: 390px;
   float: left;
 }
-.containers{
+.containers {
   background-color: #eeeeee;
   left: 0;
   right: 0;
@@ -146,7 +147,7 @@ export default {
   bottom: 0;
   position: fixed;
 }
-#title{
+#title {
   font-size: 30px;
 }
 .beg-login-box {
@@ -159,10 +160,10 @@ export default {
   width: 500px;
   height: 50px;
 }
-.form-group{
+.form-group {
   margin-top: 30px;
 }
-.beg-login-main{
+.beg-login-main {
   padding-top: 36px;
 }
 .beg-login-main .layui-form-item {
@@ -182,7 +183,7 @@ export default {
 input button {
   border-radius: 3px;
 }
-#copyRight{
+#copyRight {
   position: fixed;
   bottom: 10%;
   color: #6e6e6e;

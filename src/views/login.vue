@@ -32,7 +32,6 @@
                     <div class="form-group login">
                         <button type="submit" class="layui-btn " @click="submit" id="submitlogin">登录</button>
                     </div>
-                </div>
                 </form>
             </div>
         </div>
