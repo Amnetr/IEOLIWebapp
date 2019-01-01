@@ -8,13 +8,7 @@
         <div class="prepanel">
           <div class="panel-group" id="accordion">
             <div class="caption" v-for="item in list" :key="item.taskid">
-              <input
-                type="checkbox"
-                class="form-check-input"
-                name="task"
-                v-model="item.taskid"
-                checked
-              >
+              <input type="checkbox" class="form-check-input" name="task">
               <label class="form-check-label">{{item.taskdescription}}</label>
             </div>
           </div>
@@ -31,15 +25,15 @@
 export default {
   name: 'task',
   data () {
-    let listTemp = {};
-    listTemp.list = [];
+    let listTemp = {}
+    listTemp.list = []
     for (let i = 1; i < 10; i++) {
       listTemp.list.push({
         taskid: i,
         taskdescription: 'test' + i
       })
     }
-    return listTemp;
+    return listTemp
   }
 }
 </script>
