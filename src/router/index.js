@@ -23,17 +23,17 @@ export default new Router({
       component: login
     },
     {
-      path: '/task.html',
+      path: '/task',
       name: 'task',
       component: task
     },
     {
-      path: '/forgetPassword.html',
+      path: '/forgetPassword',
       name: 'forgetPassword',
       component: forgetPassword
     },
     {
-      path: '/signup.html',
+      path: '/signup',
       name: 'signup',
       component: signup
     }
