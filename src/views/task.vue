@@ -1,51 +1,45 @@
 <template>
-<div class="headline">
+  <div class="headline">
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <div id="rectrangle"></div>
-            <h3 id="title">挑选任务进行标注</h3>
-            <div class="prepanel">
-                <div class="panel-group" id="accordion">
-                    <!-- <c:forEach items="${list}" var="model" varStatus="status">
-
-                        <div class="caption" align="left">
-                            <input type="checkbox" name="task" value="${model.taskid}" checked>
-                            <span class="taskDescription"></span>
-                        </div>
-
-                    </c:forEach> -->
-                    <div class="caption" align= "left" v-for="item in list" :key = item.taskid>
-                      <input type="checkbox" name="task" v-model="item.taskid" checked>
-                       <span class="taskDescription">{{item.taskdescription}}</span>
-                    </div>
-                    <p align="center">
-                        <a onclick="settask()" target="_blank" class="btn btn-info" role="button">选择</a>
-                    </p>
-                </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div id="rectrangle"></div>
+        <h3 id="title">挑选任务进行标注</h3>
+        <div class="prepanel">
+          <div class="panel-group" id="accordion">
+            <div class="caption" v-for="item in list" :key="item.taskid">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                name="task"
+                v-model="item.taskid"
+                checked
+              >
+              <label class="form-check-label">{{item.taskdescription}}</label>
             </div>
+          </div>
+          <p class="task-btn">
+            <a onclick="settask()" target="_blank" class="btn btn-info" role="button">选择</a>
+          </p>
         </div>
-            <div class="col-md-2"></div>
-        </div>
+      </div>
+      <div class="col-md-2"></div>
     </div>
+  </div>
 </template>
 <script>
 export default {
   name: 'task',
   data () {
-    return {
-      list: [{
-        taskid: '1',
-        taskdescription: 'test1'
-      }, {
-        taskid: '2',
-        taskdescription: 'test2'
-      }, {
-        taskid: '3',
-        taskdescription: 'test3'
-      }]
-      // 任务：${model.taskdescription}
+    let listTemp = {};
+    listTemp.list = [];
+    for (let i = 1; i < 10; i++) {
+      listTemp.list.push({
+        taskid: i,
+        taskdescription: 'test' + i
+      })
     }
+    return listTemp;
   }
 }
 </script>
@@ -83,7 +77,7 @@ export default {
 #title {
   margin: 30px 30px 30px 7px;
   padding: 0px;
-  font-family: 'PingHei';
+  font-family: "PingHei";
   font-size: 30px;
 }
 
@@ -93,14 +87,39 @@ export default {
 }
 
 .prepanel {
-  height: 100vh;
   background-color: rgba(255, 255, 255, 0.3);
-  padding: 10px 20px 0px 20px;
+  padding: 20px 20px 20px 20px;
 }
 
 #pretiltle {
-  font-family: 'PingHei';
+  font-family: "PingHei";
   font-size: 20px;
   margin: 0px 10px 20px 10px;
+}
+
+.taskDescription {
+  font-size: 1.5rem;
+}
+
+.panel-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.caption {
+  flex-grow: 0;
+  text-align: center;
+  width: 25%;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+}
+
+.task-btn {
+  margin: 1rem 0 0 0;
+  color: white;
 }
 </style>
