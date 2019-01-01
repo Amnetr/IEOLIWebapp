@@ -23,17 +23,17 @@
 </template>
 <script>
 export default {
-  name: 'task',
+  name: 'selectTask',
   data () {
-    let listTemp = {}
-    listTemp.list = []
+    let mockData = {}
+    mockData.list = []
     for (let i = 1; i < 10; i++) {
-      listTemp.list.push({
+      mockData.list.push({
         taskid: i,
         taskdescription: 'test' + i
       })
     }
-    return listTemp
+    return mockData
   }
 }
 </script>
