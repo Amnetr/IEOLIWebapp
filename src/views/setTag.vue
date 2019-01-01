@@ -11,19 +11,37 @@
           <button class="btn btn-light btn-green-color float-left">提交标注</button>
           <button class="btn btn-light float-left">换一篇</button>
         </div>
+        <div class="subtitle">
+          <div class="nav-dot"></div>
+          <span>选择相应阶段</span>
+        </div>
         <div class="select-container">
           <div class="step-checkbox" v-for="item in stepList" :key="item.stepid">
             <input
               class="form-check-input"
               type="radio"
-              name="exampleRadios"
-              id="exampleRadios1"
-              value="option1"
+              name="stepRadios"
+              id="item.stepid"
+              value="item.stepDescription"
             >
             <label class="form-check-label" for="exampleRadios1">{{item.stepDescription}}</label>
           </div>
         </div>
-        <div class="select-container"></div>
+        <div class="subtitle">
+          <div class="nav-dot"></div>
+          <span>选择任务</span>
+        </div>
+        <div class="select-container">
+          <div class="task-div">
+            <div class="task-btns" v-for="(item,index) in taskList" :key="item.taskid">
+              <label>{{index + 1}}.{{item.taskid}}</label>
+              <div class="btn-group task-group-btns" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-light btn-sm task-green-btn">标注</button>
+                <button type="button" class="btn btn-light btn-sm">清除</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="space-right"></div>
@@ -52,6 +70,24 @@ export default {
 }
 </script>
 <style scoped>
+.task-group-btns{
+  margin-left: 1.8rem;
+}
+
+.task-green-btn {
+  background-color: #1aa094;
+  color: white;
+  margin-left: 2rem;
+}
+
+.subtitle {
+  margin-top: 2rem;
+  font-size: 1rem;
+  line-height: 1rem;
+  padding-left: 1.5rem;
+  text-align: left;
+}
+
 .main-container {
   display: flex;
   flex-direction: row;
@@ -101,7 +137,7 @@ export default {
 }
 
 .btns-div {
-  height: 2rem;
+  overflow: hidden;
 }
 
 .nav-bar {
@@ -111,6 +147,15 @@ export default {
   background-color: #1aa094;
   height: 2.4rem;
   width: 0.3rem;
+}
+
+.nav-dot {
+  position: absolute;
+  left: 1.5rem;
+  display: inline-block;
+  background-color: #1aa094;
+  height: 0.7rem;
+  width: 0.7rem;
 }
 
 .btn-green-color {
@@ -123,15 +168,23 @@ export default {
   width: 100%;
   min-height: 2rem;
   /* background-color: #dbdbdb28; */
-  margin: 1.5rem 0;
+  margin: 0.8rem 0 0 0;
   overflow: hidden;
-  font-size: 0.9rem;
-  padding: 0 1.2rem;
+  font-size: 1rem;
+  padding: 0 2.7rem;
 }
 
 .step-checkbox {
   width: 50%;
   float: left;
   text-align: left;
+}
+
+.task-btns {
+  text-align: left;
+}
+
+.task-div {
+  margin-left: -1.2rem;
 }
 </style>
