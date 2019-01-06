@@ -7,6 +7,10 @@ import $ from 'jquery'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import '../node_modules/bootstrap/dist/js/bootstrap.min.js'
 import '../node_modules/layui-src/src/css/layui.css'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
+Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 
