@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import login from '@/views/login'
 import selectTask from '@/views/selectTask'
 import forgetPassword from '@/views/forgetPassword'
 import signup from '@/views/signup'
 import setTag from '@/views/setTag'
+import mgrIndex from '@/views/mgrIndex'
 
 Vue.use(Router)
 
@@ -37,6 +37,11 @@ export default new Router({
       path: '/setTag',
       name: 'setTag',
       component: setTag
+    },
+    {
+      path: '/mgrIndex',
+      name: 'mgrIndex',
+      component: mgrIndex
     }
   ]
 })
