@@ -30,5 +30,3 @@ export default {
   font-family: Helvetica;
 }
 </style>
-
-
