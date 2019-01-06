@@ -83,6 +83,7 @@ export default {
 .prepanel {
   background-color: rgba(255, 255, 255, 0.3);
   padding: 20px 20px 20px 20px;
+  text-align: center;
 }
 
 #pretiltle {
