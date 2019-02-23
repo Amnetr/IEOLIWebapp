@@ -1,18 +1,21 @@
 <template>
   <el-menu
-    default-active="1-1"
+    default-active="/updateText"
     class="my-left-menu"
     @open="handleOpen"
     @close="handleClose"
     active-text-color="#1aa094"
+    router
   >
     <el-submenu index="1">
       <template slot="title">
         <i class="el-icon-menu"></i>
         <span>操作列表</span>
       </template>
-      <el-menu-item index="1-1">
-        <i class="el-icon-upload"></i>上传文本
+      <el-menu-item index="/updateText">
+        <i class="el-icon-upload">
+          <!-- <router-link to="/updateText"></router-link> -->
+        </i>上传文本
       </el-menu-item>
       <el-menu-item index="1-2">
         <i class="el-icon-edit"></i>修改任务

@@ -6,6 +6,7 @@ import forgetPassword from '@/views/forgetPassword'
 import signup from '@/views/signup'
 import setTag from '@/views/setTag'
 import mgrIndex from '@/views/mgrIndex'
+import updateText from '@/views/updateText'
 
 Vue.use(Router)
 
@@ -42,6 +43,11 @@ export default new Router({
       path: '/mgrIndex',
       name: 'mgrIndex',
       component: mgrIndex
+    },
+    {
+      path: '/updateText',
+      name: 'updateText',
+      component: updateText
     }
   ]
 })
