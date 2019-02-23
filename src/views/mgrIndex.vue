@@ -8,7 +8,7 @@
     </div>
     <div class="right-container">
       <p>dsdsdsdsds</p>
-      <router-view name="contentView"></router-view>
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -20,7 +20,8 @@ import updateText from '@/views/updateText.vue'
 export default {
   name: 'mgrIndex',
   components: {
-    leftMenu, topMenu
+    leftMenu,
+    topMenu
   }
 }
 </script>

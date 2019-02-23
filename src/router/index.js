@@ -13,8 +13,7 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   base: '/',
-  routes: [
-    {
+  routes: [{
       path: '',
       name: 'login',
       component: login
@@ -42,12 +41,11 @@ export default new Router({
     {
       path: '/mgrIndex',
       name: 'mgrIndex',
-      component: mgrIndex
-    },
-    {
-      path: '/updateText',
-      name: 'updateText',
-      component: updateText
+      component: mgrIndex,
+      children: [{
+        path: 'updateText',
+        component: updateText
+      }]
     }
   ]
 })

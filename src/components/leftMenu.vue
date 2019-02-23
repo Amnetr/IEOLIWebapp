@@ -1,6 +1,6 @@
 <template>
   <el-menu
-    default-active="/updateText"
+    default-active="/mgrIndex/updateText"
     class="my-left-menu"
     @open="handleOpen"
     @close="handleClose"
@@ -12,7 +12,7 @@
         <i class="el-icon-menu"></i>
         <span>操作列表</span>
       </template>
-      <el-menu-item index="/updateText">
+      <el-menu-item index="/mgrIndex/updateText">
         <i class="el-icon-upload">
           <!-- <router-link to="/updateText"></router-link> -->
         </i>上传文本
@@ -43,6 +43,11 @@ export default {
     handleClose (key, keyPath) {
       console.log(key, keyPath)
     }
+  },
+  computed: {
+    // activeIndex () {
+    //   return this.$route.path.replace('/', '')
+    // }
   }
 }
 </script>
