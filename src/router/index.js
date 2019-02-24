@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/views/login'
@@ -6,7 +7,11 @@ import forgetPassword from '@/views/forgetPassword'
 import signup from '@/views/signup'
 import setTag from '@/views/setTag'
 import mgrIndex from '@/views/mgrIndex'
-import updateText from '@/views/updateText'
+import uploadText from '@/views/uploadText'
+import editTask from '@/views/editTask'
+import editElement from '@/views/editElement'
+import downloadResult from '@/views/downloadResult'
+import viewRules from '@/views/viewRules'
 
 Vue.use(Router)
 
@@ -43,9 +48,26 @@ export default new Router({
       name: 'mgrIndex',
       component: mgrIndex,
       children: [{
-        path: 'updateText',
-        component: updateText
+        path: 'uploadText',
+        component: uploadText
+      },{
+        path: 'editTask',
+        component: editTask
+      },{
+        path: 'editElement',
+        component: editElement
+      },{
+        path: 'downloadResult',
+        component: downloadResult
+      },{
+        path: 'viewRules',
+        component: viewRules
       }]
+    },
+    {
+      path: '/uploadText',
+      name: 'uploadText',
+      component: uploadText
     }
   ]
 })

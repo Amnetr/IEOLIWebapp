@@ -1,6 +1,6 @@
 <template>
   <el-menu
-    default-active="/mgrIndex/updateText"
+    default-active="/mgrIndex/uploadText"
     class="my-left-menu"
     @open="handleOpen"
     @close="handleClose"
@@ -12,21 +12,21 @@
         <i class="el-icon-menu"></i>
         <span>操作列表</span>
       </template>
-      <el-menu-item index="/mgrIndex/updateText">
+      <el-menu-item index="/mgrIndex/uploadText">
         <i class="el-icon-upload">
-          <!-- <router-link to="/updateText"></router-link> -->
+          <!-- <router-link to="/uploadText"></router-link> -->
         </i>上传文本
       </el-menu-item>
-      <el-menu-item index="1-2">
+      <el-menu-item index="/mgrIndex/editTask">
         <i class="el-icon-edit"></i>修改任务
       </el-menu-item>
-      <el-menu-item index="1-3">
+      <el-menu-item index="/mgrIndex/editElement">
         <i class="el-icon-edit-outline"></i>修改要素
       </el-menu-item>
-      <el-menu-item index="1-4">
+      <el-menu-item index="/mgrIndex/downloadResult">
         <i class="el-icon-download"></i>下载标注结果
       </el-menu-item>
-      <el-menu-item index="1-5">
+      <el-menu-item index="viewRules">
         <i class="el-icon-document"></i>显示要素规则
       </el-menu-item>
     </el-submenu>

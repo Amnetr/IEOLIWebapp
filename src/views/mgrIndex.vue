@@ -7,7 +7,6 @@
       <leftMenu></leftMenu>
     </div>
     <div class="right-container">
-      <p>dsdsdsdsds</p>
       <router-view></router-view>
     </div>
   </div>
@@ -16,7 +15,7 @@
 <script>
 import leftMenu from '@/components/leftMenu.vue'
 import topMenu from '@/components/topMenu.vue'
-import updateText from '@/views/updateText.vue'
+import uploadText from '@/views/uploadText.vue'
 export default {
   name: 'mgrIndex',
   components: {
