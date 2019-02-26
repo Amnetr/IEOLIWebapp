@@ -2,9 +2,55 @@
   <div>
     <div class="title-container">
       <div class="title-dot"></div>
-      <span id="title">请修改要素</span>
+      <span id="title">请编辑要素</span>
     </div>
-    <div class="mainConatiner"></div>
+    <div class="mainConatiner">
+      <el-table :data="tableData" style="width: 100%">
+        <el-table-column label="序号" width="180">
+          <template slot-scope="scope">
+            <span>{{ scope.row.num }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="要素" width="180">
+          <template slot-scope="scope">
+            <span>{{ scope.row.description }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div style="margin-top: 20px">
+        <el-button @click="newElementDialog = true">新增要素</el-button>
+      </div>
+    </div>
+    <!-- 新增要素 -->
+    <el-dialog title="新增要素" :visible.sync="newElementDialog" width="30%">
+      <el-form :model="newElementData">
+        <el-form-item label="要素描述" :label-width="formLabelWidth">
+          <el-input v-model="newElementData.description" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="newElementDialog = false">取 消</el-button>
+        <el-button type="primary" @click="newElementDialog = false">确 定</el-button>
+      </div>
+    </el-dialog>
+    <!-- 修改要素 -->
+    <el-dialog title="新增要素" :visible.sync="editElementDialog" width="30%">
+      <el-form :model="editElementData">
+        <el-form-item label="要素描述" :label-width="formLabelWidth">
+          <el-input v-model="editElementData.description" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="editElementDialog = false">取 消</el-button>
+        <el-button type="primary" @click="editElementDialog = false">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -15,9 +61,27 @@ export default {
   },
   data () {
     return {
+      tableData: [{
+        num: '1',
+        description: '王小虎'
+      }, {
+        num: '2',
+        description: '王小虎'
+      }],
+      formLabelWidth: '80px',
+      newElementDialog: false,
+      editElementDialog: false,
+      newElementData: {},
+      editElementData: {}
     }
   },
   methods: {
+    handleEdit (index, row) {
+      this.editElementDialog = true
+    },
+    handleDelete (index, row) {
+      console.log(index, row)
+    }
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <el-menu
-    default-active="/mgrIndex/uploadText"
+    :default-active="activeIndex"
     class="my-left-menu"
     @open="handleOpen"
     @close="handleClose"
@@ -18,10 +18,10 @@
         </i>上传文本
       </el-menu-item>
       <el-menu-item index="/mgrIndex/editTask">
-        <i class="el-icon-edit"></i>修改任务
+        <i class="el-icon-edit"></i>编辑任务
       </el-menu-item>
       <el-menu-item index="/mgrIndex/editElement">
-        <i class="el-icon-edit-outline"></i>修改要素
+        <i class="el-icon-edit-outline"></i>编辑要素
       </el-menu-item>
       <el-menu-item index="/mgrIndex/downloadResult">
         <i class="el-icon-download"></i>下载标注结果
@@ -45,9 +45,9 @@ export default {
     }
   },
   computed: {
-    // activeIndex () {
-    //   return this.$route.path.replace('/', '')
-    // }
+    activeIndex () {
+      return this.$route.path
+    }
   }
 }
 </script>
