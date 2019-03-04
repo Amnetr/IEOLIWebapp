@@ -21,7 +21,7 @@
       <div style="margin-top: 20px">
         <el-button @click="deleteSelection()">删除选择</el-button>
         <el-button @click="toggleSelection()">取消选择</el-button>
-        <el-button @click="dialogFormVisible = true">新增任务</el-button>
+        <el-button @click="dialogFormVisible = true" id="createBtn">新增任务</el-button>
       </div>
       <el-dialog title="新增任务" :visible.sync="dialogFormVisible" width="30%">
         <el-form :model="form">
@@ -98,5 +98,9 @@ export default {
 .mainConatiner {
   width: 50%;
   margin: 1.6rem 2rem;
+}
+#createBtn {
+  background-color: #1aa094;
+  color: #fff;
 }
 </style>

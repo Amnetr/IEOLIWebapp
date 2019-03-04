@@ -24,7 +24,7 @@
         </el-table-column>
       </el-table>
       <div style="margin-top: 20px">
-        <el-button @click="newElementDialog = true">新增要素</el-button>
+        <el-button @click="newElementDialog = true" id="createBtn">新增要素</el-button>
       </div>
     </div>
     <!-- 新增要素 -->
@@ -40,7 +40,7 @@
       </div>
     </el-dialog>
     <!-- 修改要素 -->
-    <el-dialog title="新增要素" :visible.sync="editElementDialog" width="30%">
+    <el-dialog title="编辑要素" :visible.sync="editElementDialog" width="30%">
       <el-form :model="editElementData">
         <el-form-item label="要素描述" :label-width="formLabelWidth">
           <el-input v-model="editElementData.description" autocomplete="off"></el-input>
@@ -80,7 +80,21 @@ export default {
       this.editElementDialog = true
     },
     handleDelete (index, row) {
-      console.log(index, row)
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     }
   }
 }
@@ -104,5 +118,9 @@ export default {
 .mainConatiner {
   width: 50%;
   margin: 1.6rem 2rem;
+}
+#createBtn {
+  background-color: #1aa094;
+  color: #fff;
 }
 </style>

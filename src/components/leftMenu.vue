@@ -26,7 +26,7 @@
       <el-menu-item index="/mgrIndex/downloadResult">
         <i class="el-icon-download"></i>下载标注结果
       </el-menu-item>
-      <el-menu-item index="viewRules">
+      <el-menu-item index="/mgrIndex/viewRules">
         <i class="el-icon-document"></i>显示要素规则
       </el-menu-item>
     </el-submenu>

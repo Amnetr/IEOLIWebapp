@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/views/login'
 import selectTask from '@/views/selectTask'
+import selectElement from '@/views/selectElement'
 import forgetPassword from '@/views/forgetPassword'
 import signup from '@/views/signup'
 import setTag from '@/views/setTag'
@@ -29,6 +30,11 @@ export default new Router({
       component: selectTask
     },
     {
+      path: '/selectElement',
+      name: 'selectElement',
+      component: selectElement
+    },
+    {
       path: '/forgetPassword',
       name: 'forgetPassword',
       component: forgetPassword
@@ -50,16 +56,16 @@ export default new Router({
       children: [{
         path: 'uploadText',
         component: uploadText
-      },{
+      }, {
         path: 'editTask',
         component: editTask
-      },{
+      }, {
         path: 'editElement',
         component: editElement
-      },{
+      }, {
         path: 'downloadResult',
         component: downloadResult
-      },{
+      }, {
         path: 'viewRules',
         component: viewRules
       }]
