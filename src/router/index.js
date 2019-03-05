@@ -7,6 +7,7 @@ import selectElement from '@/views/selectElement'
 import forgetPassword from '@/views/forgetPassword'
 import signup from '@/views/signup'
 import setTag from '@/views/setTag'
+import setRules from '@/views/setRules'
 import mgrIndex from '@/views/mgrIndex'
 import uploadText from '@/views/uploadText'
 import editTask from '@/views/editTask'
@@ -48,6 +49,11 @@ export default new Router({
       path: '/setTag',
       name: 'setTag',
       component: setTag
+    },
+    {
+      path: '/setRules',
+      name: 'setRules',
+      component: setRules
     },
     {
       path: '/mgrIndex',
