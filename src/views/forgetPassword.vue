@@ -9,7 +9,7 @@
           </label>
           <input type="text" v-model="userName" autocomplete="off" placeholder="请输入邮箱"
                  class="layui-input" id="mailAddress" maxlength="20">
-          <button @click="sendmail" class="layui-btn layui-btn-small" name="submitf">发送验证码</button>
+          <button @click="sendMail" class="layui-btn layui-btn-small" name="submitf">发送验证码</button>
          </div>
          <div class="layui-form-item">
            <label class="beg-login-icon pull-left">
@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     sendMail () {
-
+      console.log('sasa')
     },
     check () {
       if (!(this.newPassword.length || this.rePassword.length || this.userName || this.code.length)) {
@@ -134,7 +134,7 @@ export default {
 //   }
 // }
 </script>
-<style>
+<style scoped>
 #mailAddress {
   width: 390px;
   float: left;

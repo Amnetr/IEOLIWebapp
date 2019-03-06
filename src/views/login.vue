@@ -1,41 +1,63 @@
 <template>
   <div class="beg-login-bg">
     <div class="beg-login-box">
-        <header>
-            <h1>登录</h1>
-        </header>
-        <div class="beg-login-main">
-            <form action="weblogin" class="layui-form" method="post">
-                <div class="layui-form-item">
-                    <label class="beg-login-icon">
-                        <i class="layui-icon">&#xe612;</i>
-                    </label>
-                    <input type="text" name="username" lay-verify="username" autocomplete="off" placeholder="这里输入登录名"
-                        class="layui-input" maxlength="20" v-model="userName">
-                </div>
-                <div class="layui-form-item">
-                    <label class="beg-login-icon">
-                        <i class="layui-icon">&#xe642;</i>
-                    </label>
-                    <input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="这里输入密码"
-                        class="layui-input" maxlength="8" v-model="password">
-                    <span id="error" v-if="error">{{result}}</span>
-                </div>
-                <div class="layui-form-item">
-                    <div class="form-group" id="btnGroup">
-                        <button @click="forget" type="button"
-                         class="layui-btn layui-btn-primary layui-btn-small btn-forget ">忘记密码</button>
-                        <button  type="button" @click="signup"
-                        class="layui-btn layui-btn-primary layui-btn-small btn-login ">用户注册</button>
-                    </div>
-                </div>
-                    <div class="form-group login">
-                        <button type="submit" class="layui-btn " @click="submit" id="submitlogin">登录</button>
-                    </div>
-                </form>
+      <header>
+        <h1>登录</h1>
+      </header>
+      <div class="beg-login-main">
+        <div action="weblogin" class="layui-form" method="post">
+          <div class="layui-form-item">
+            <label class="beg-login-icon">
+              <i class="layui-icon">&#xe612;</i>
+            </label>
+            <input
+              type="text"
+              name="username"
+              lay-verify="username"
+              autocomplete="off"
+              placeholder="这里输入登录名"
+              class="layui-input"
+              maxlength="20"
+              v-model="userName"
+            >
+          </div>
+          <div class="layui-form-item">
+            <label class="beg-login-icon">
+              <i class="layui-icon">&#xe642;</i>
+            </label>
+            <input
+              type="password"
+              name="password"
+              lay-verify="password"
+              autocomplete="off"
+              placeholder="这里输入密码"
+              class="layui-input"
+              maxlength="8"
+              v-model="password"
+            >
+            <span id="error" v-if="error">{{result}}</span>
+          </div>
+          <div class="layui-form-item">
+            <div class="form-group" id="btnGroup">
+              <button
+                @click="forget"
+                type="button"
+                class="layui-btn layui-btn-primary layui-btn-small btn-forget"
+              >忘记密码</button>
+              <button
+                type="button"
+                @click="signup"
+                class="layui-btn layui-btn-primary layui-btn-small btn-login"
+              >用户注册</button>
             </div>
+          </div>
+          <div class="form-group login">
+            <button class="layui-btn" @click="submit" id="submitlogin">登录</button>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -52,15 +74,22 @@ export default {
   methods: {
     forget () {
       this.$router.push({
-        path: 'forgetPassword.html'
+        path: 'forgetPassword'
       })
     },
     submit () {
-
+      this.axios.post('/api/weblogin',
+        {
+          username: this.userName,
+          password: this.password
+        }
+      ).then(function (respons) {
+        console.log(respons)
+      })
     },
     signup () {
       this.$router.push({
-        path: 'signup.html'
+        path: 'signup'
       })
     }
   }
