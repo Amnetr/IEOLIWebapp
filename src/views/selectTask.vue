@@ -8,12 +8,12 @@
         <div class="prepanel">
           <div class="panel-group" id="accordion">
             <div class="caption" v-for="item in list" :key="item.taskid">
-              <input type="checkbox" class="form-check-input" name="task">
+              <input type="checkbox" class="form-check-input" v-model="task" :value="item.taskid">
               <label class="form-check-label">{{item.taskdescription}}</label>
             </div>
           </div>
           <p class="task-btn">
-            <a onclick="settask()" target="_blank" class="btn btn-info" role="button">选择</a>
+            <a v-on:click="settask" target="_blank" class="btn btn-info" role="button">选择</a>
           </p>
         </div>
       </div>
@@ -25,19 +25,36 @@
 export default {
   name: 'selectTask',
   data () {
-    let mockData = {}
-    mockData.list = []
-    for (let i = 1; i < 10; i++) {
-      mockData.list.push({
-        taskid: i,
-        taskdescription: 'test' + i
+    if (this.$route.params.list) {
+      return {
+        list: this.$route.params.list,
+        task: []
+      }
+    } else {
+      this.$router.push({
+        name: 'login'
+      })
+      return {
+        list: []
+      }
+    }
+  },
+  methods: {
+    settask () {
+      this.axios.post('/api/setTask', {
+        models: this.task.toString()
+      }).then(function (respons) {
+        console.log(respons)
       })
     }
-    return mockData
   }
 }
 </script>
 <style scoped>
+.form-check-label {
+  margin-left: 0.5rem;
+  font-size: 1.25rem;
+}
 .taskList {
   font-size: 25px;
   margin-right: 2px;

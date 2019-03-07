@@ -78,13 +78,42 @@ export default {
       })
     },
     submit () {
+      const router = this.$router
+      const message = this.$message
       this.axios.post('/api/weblogin',
         {
           username: this.userName,
           password: this.password
         }
       ).then(function (respons) {
-        console.log(respons)
+        if (respons.data.Result === 'success') {
+          switch (respons.data.actor) {
+            case 1:
+              router.push({
+                path: 'mgrIndex'
+              })
+              break
+            case 0:
+              router.push({
+                name: 'selectTask',
+                params: {
+                  list: respons.data.list
+                }
+              })
+              break
+            case 2:
+              router.push({
+                path: 'selectElement'
+              })
+              break
+          }
+        } else if (respons.data.Result === 'failed') {
+          message({
+            message: '用户名或密码错误！',
+            type: 'error',
+            center: true
+          })
+        }
       })
     },
     signup () {
@@ -108,7 +137,7 @@ button {
   height: 350px;
 }
 #submitlogin {
-  width: 220px;
+  width: 100%;
 }
 #app {
   height: 100%;

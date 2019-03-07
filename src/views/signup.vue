@@ -1,45 +1,75 @@
 <template>
-<div class="containers">
-  <div class="beg-login-box">
-    <span id = "title" >注册</span>
-    <div class="beg-login-main">
-      <div class="layui-form-item">
-        <label class="beg-login-icon">
-          <i class="layui-icon">&#xe612;</i>
-        </label>
-        <input type="text" id="username" v-model="userName" autocomplete="off"
-               placeholder="请输入邮箱" class="layui-input"  maxlength="20">
-      </div>
-      <div class="layui-form-item">
-        <label class="beg-login-icon pull-left">
-          <i class="layui-icon">&#xe642;</i>
-        </label>
-        <input type="text" id="code" v-model="code" autocomplete="off" placeholder="请输入验证码"
-               class="layui-input" maxlength="8">
-        <button @click="sendmail" class="layui-btn layui-btn-small" name="submitf">发送验证码</button>
-      </div>
-      <div class="layui-form-item">
-        <label class="beg-login-icon">
-          <i class="layui-icon">&#xe642;</i>
-        </label>
-        <input type="password" id="password" v-model="password" lay-verify="password"
-               autocomplete="off" placeholder="请输入新密码" class="layui-input" maxlength="8">
-      </div>
-      <div class="layui-form-item">
-        <label class="beg-login-icon">
-          <i class="layui-icon">&#xe642;</i>
-        </label>
-        <input type="password" id="repassword" v-model="repassword" lay-verify="password"
-             autocomplete="off" placeholder="再次输入密码" class="layui-input" maxlength="8">
-      </div>
-      <div class ="form-group" >
-        <button @click="check" class="layui-btn layui-btn-small" id="signupBtn" >注册</button>
-      </div>
+  <div class="containers">
+    <div class="beg-login-box">
+      <span id="title">注册</span>
+      <div class="beg-login-main">
+        <div class="layui-form-item">
+          <label class="beg-login-icon">
+            <i class="layui-icon">&#xe612;</i>
+          </label>
+          <input
+            type="text"
+            id="username"
+            v-model="userName"
+            autocomplete="off"
+            placeholder="请输入邮箱"
+            class="layui-input"
+            maxlength="20"
+          >
+        </div>
+        <div class="layui-form-item">
+          <label class="beg-login-icon pull-left">
+            <i class="layui-icon">&#xe642;</i>
+          </label>
+          <input
+            type="text"
+            id="code"
+            v-model="code"
+            autocomplete="off"
+            placeholder="请输入验证码"
+            class="layui-input"
+            maxlength="8"
+          >
+          <button @click="sendmail" class="layui-btn layui-btn-small" name="submitf">发送验证码</button>
+        </div>
+        <div class="layui-form-item">
+          <label class="beg-login-icon">
+            <i class="layui-icon">&#xe642;</i>
+          </label>
+          <input
+            type="password"
+            id="password"
+            v-model="password"
+            lay-verify="password"
+            autocomplete="off"
+            placeholder="请输入新密码"
+            class="layui-input"
+            maxlength="8"
+          >
+        </div>
+        <div class="layui-form-item">
+          <label class="beg-login-icon">
+            <i class="layui-icon">&#xe642;</i>
+          </label>
+          <input
+            type="password"
+            id="repassword"
+            v-model="repassword"
+            lay-verify="password"
+            autocomplete="off"
+            placeholder="再次输入密码"
+            class="layui-input"
+            maxlength="8"
+          >
+        </div>
+        <div class="form-group">
+          <button @click="check" class="layui-btn layui-btn-small" id="signupBtn">注册</button>
+        </div>
         <div class="beg-clear"></div>
+      </div>
+      <Copyright></Copyright>
     </div>
-    <Copyright></Copyright>
   </div>
-</div>
 </template>
 <script>
 import Copyright from '@/components/copyright'
@@ -51,6 +81,14 @@ export default {
       code: '',
       password: '',
       repassword: ''
+    }
+  },
+  methods: {
+    sendmail () {
+
+    },
+    check () {
+
     }
   }
 }
