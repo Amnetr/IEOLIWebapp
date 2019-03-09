@@ -14,8 +14,10 @@ import VueAxios from 'vue-axios'
 import global from './common.vue'
 
 Vue.use(ElementUI)
+Vue.config.debug = true
 
 // 转换post请求格式
+axios.defaults.withCredentials = true
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded'
 axios.defaults.transformRequest = [function (data) {

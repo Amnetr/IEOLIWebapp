@@ -41,8 +41,7 @@ export default {
   },
   methods: {
     settask () {
-      this.axios.post('/api/setTask', {
-        models: this.task.toString()
+      this.axios.post('/api/setTask?models=1,2', {
       }).then(function (respons) {
         console.log(respons)
       })

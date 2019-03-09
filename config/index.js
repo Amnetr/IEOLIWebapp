@@ -12,10 +12,10 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://localhost:8888/Interactive_Extration_Of_Law_Ingredient', //后端接口地址
+        target: 'http://localhost:8888', //后端接口地址
         changeOrigin: true, //是否允许跨越
         pathRewrite: {
-          '^/api': '', //重写,
+          '^/api': '/', //重写,
         }
       }
     },
