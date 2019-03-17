@@ -90,7 +90,7 @@ export default {
           switch (respons.data.actor) {
             case 1:
               router.push({
-                path: 'mgrIndex'
+                name: 'mgrIndex'
               })
               break
             case 0:
@@ -103,7 +103,10 @@ export default {
               break
             case 2:
               router.push({
-                path: 'selectElement'
+                name: 'selectElement',
+                params: {
+                  list: respons.data.list2
+                }
               })
               break
           }

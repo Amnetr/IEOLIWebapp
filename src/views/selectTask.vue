@@ -41,9 +41,13 @@ export default {
   },
   methods: {
     settask () {
-      this.axios.post('/api/setTask?models=1,2', {
+      const router = this.$router
+      this.axios.post('/api/setTask?models=' + this.task.toString(), {
       }).then(function (respons) {
-        console.log(respons)
+        router.push({
+          name: 'setTag',
+          params: respons.data
+        })
       })
     }
   }

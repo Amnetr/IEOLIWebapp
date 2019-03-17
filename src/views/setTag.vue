@@ -3,13 +3,20 @@
     <div class="space-left"></div>
     <div class="main-content">
       <div class="passage-container">
-        <div class="passage" v-if="passage"></div>
+        <div class="passage" v-if="passageList">
+          <span
+            v-for="(value,index) in passageList"
+            class="passage-span"
+            :id="index + 1"
+            :key="index"
+          >{{value}}</span>
+        </div>
       </div>
       <div class="operation-container">
         <div class="btns-div">
           <div class="nav-bar"></div>
-          <button class="btn btn-light btn-green-color float-left">提交标注</button>
-          <button class="btn btn-light float-left">换一篇</button>
+          <button class="btn btn-light btn-green-color float-left" @click="submitResult">提交标注</button>
+          <button class="btn btn-light float-left" @click="changePassage">换一篇</button>
         </div>
         <div class="subtitle">
           <div class="nav-dot"></div>
@@ -21,8 +28,9 @@
               class="form-check-input"
               type="radio"
               name="stepRadios"
-              id="item.stepid"
-              value="item.stepDescription"
+              :id="'step' + item.stepid"
+              :value="item.stepid"
+              v-model="selectStep"
             >
             <label class="form-check-label" for="exampleRadios1">{{item.stepDescription}}</label>
           </div>
@@ -34,10 +42,14 @@
         <div class="select-container">
           <div class="task-div">
             <div class="task-btns" v-for="(item,index) in taskList" :key="item.taskid">
-              <label>{{index + 1}}.{{item.taskid}}</label>
+              <label>{{index + 1}}.{{item.taskdescription}}</label>
               <div class="btn-group task-group-btns" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-light btn-sm task-green-btn">标注</button>
-                <button type="button" class="btn btn-light btn-sm">清除</button>
+                <button
+                  type="button"
+                  class="btn btn-light btn-sm task-green-btn"
+                  @click="setTag(item)"
+                >标注</button>
+                <button type="button" class="btn btn-light btn-sm" disabled>清除</button>
               </div>
             </div>
           </div>
@@ -51,26 +63,100 @@
 export default {
   name: 'setTag',
   data () {
-    let mockData = {}
-    mockData.stepList = []
-    mockData.taskList = []
-    for (let i = 1; i < 10; i++) {
-      mockData.stepList.push({
-        stepid: 'step' + i,
-        stepDescription: '阶段' + i
+    if (this.$route.params.list) {
+      let mockData = {}
+      mockData.stepList = []
+      mockData.taskList = []
+      for (let i = 1; i < 9; i++) {
+        mockData.stepList.push({
+          stepid: i,
+          stepDescription: '阶段' + i
+        })
+      }
+      return {
+        taskList: this.$route.params.tasks,
+        stepList: mockData.stepList,
+        passageList: this.$route.params.list,
+        selectStep: '1',
+        resultData: [],
+        tagedNode: []
+      }
+    } else {
+      this.$router.push({
+        name: 'login'
       })
-      mockData.taskList.push({
-        taskid: 'task' + i,
-        taskDescription: 'task' + i
-      })
+      return {
+        stepList: [],
+        taskList: [],
+        passageList: [],
+        selectStep: '',
+        resultData: [],
+        tagedNode: []
+      }
     }
-    mockData.passage = ''
-    return mockData
+  },
+  methods: {
+    setTag (item) {
+      if (document.getSelection().anchorNode.parentElement.id && document.getSelection().focusNode.parentElement.id &&
+        (document.getSelection().anchorNode.parentElement.id !== document.getSelection().focusNode.parentElement.id)) {
+        let startNodeId = document.getSelection().anchorNode.parentElement.id
+        let endNodeId = document.getSelection().focusNode.parentElement.id
+        let startTag = '&' + this.selectStep + '_' + item.taskid + '_s'
+        let endTag = '&' + this.selectStep + '_' + item.taskid + '_p'
+        this.resultData.push(startNodeId + startTag)
+        this.resultData.push(endNodeId + endTag)
+        this.tagedNode.push(startNodeId)
+        this.tagedNode.push(endNodeId)
+        document.getElementById(startNodeId).style.backgroundColor = 'burlywood'
+        document.getElementById(startNodeId).innerHTML += startTag
+        document.getElementById(endNodeId).style.backgroundColor = 'burlywood'
+        document.getElementById(endNodeId).innerHTML += endTag
+      } else {
+        this.$message.error('请重新划选需打标签的词汇，至少包括一个起始标签和结束标签！')
+      }
+    },
+    submitResult () {
+      let result = this.resultData.join('$')
+      this.axios.post('/api/submitHT', {
+        result: result
+      }).then(function (respons) {
+        this.changePassage()
+      }.bind(this))
+    },
+    changePassage () {
+      let taskArrary = []
+      for (let i = 0; i < this.$route.params.tasks.length; i++) {
+        taskArrary.push(this.$route.params.tasks[i].taskid)
+      }
+      this.axios.post('/api/setTask?models=' + taskArrary.toString(), {
+      }).then(function (respons) {
+        this.passageList = respons.data.list
+        this.resultData = []
+        this.clearStyle()
+      }.bind(this))
+    },
+    clearStyle () {
+      for (let i = 0; i < this.tagedNode.length; i++) {
+        if (document.getElementById(this.tagedNode[i])) {
+          document.getElementById(this.tagedNode[i]).style.backgroundColor = 'initial'
+        }
+      }
+    }
   }
 }
 </script>
 <style scoped>
-.task-group-btns{
+.start-tag {
+  background-color: #1aa094;
+}
+.end-tag {
+  background-color: cornflowerblue;
+}
+.passage-span {
+  font-size: 1rem;
+  margin-right: 0.3rem;
+}
+.task-group-btns {
   margin-left: 1.8rem;
 }
 
@@ -118,7 +204,7 @@ export default {
   float: left;
   width: 75%;
   background: url(../assets/bg.png);
-  height: 100%;
+  min-height: 100%;
 }
 
 .operation-container {
@@ -131,9 +217,10 @@ export default {
 
 .passage {
   border: 2px solid #c9c9c998;
-  margin: 0.875rem;
+  margin: 0.875rem auto;
   padding: 0.3rem;
   min-height: 4rem;
+  width: 55rem;
 }
 
 .btns-div {

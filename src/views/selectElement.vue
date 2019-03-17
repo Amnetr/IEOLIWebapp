@@ -7,13 +7,13 @@
         <h3 id="title">挑选要素</h3>
         <div class="prepanel">
           <div class="panel-group" id="accordion">
-            <div class="caption" v-for="item in list" :key="item.elementId">
-              <span>序号：{{item.elementId}}</span>
+            <div class="caption" v-for="item in list" :key="item.modelid">
+              <span>序号：{{item.modelid}}</span>
               <br>
               <span>要素：</span>
-              <label class="form-check-label">{{item.elementDescription}}</label>
+              <label class="form-check-label">{{item.modelname}}</label>
               <p class="element-btn">
-                <a onclick="setElement(item)" target="_blank" class="btn btn-info" role="button">选择</a>
+                <a @click="setElement(item)" target="_blank" class="btn btn-info" role="button">选择</a>
               </p>
             </div>
           </div>
@@ -27,15 +27,35 @@
 export default {
   name: 'selectElement',
   data () {
-    let mockData = {}
-    mockData.list = []
-    for (let i = 1; i < 10; i++) {
-      mockData.list.push({
-        elementId: i,
-        elementDescription: 'test' + i
+    // let mockData = {}
+    // mockData.list = []
+    // for (let i = 1; i < 10; i++) {
+    //   mockData.list.push({
+    //     modelid: i,
+    //     modelname: 'test' + i
+    //   })
+    // }
+    // return mockData
+    if (this.$route.params.list) {
+      return {
+        list: this.$route.params.list
+      }
+    } else {
+      this.$router.push({
+        name: 'login'
+      })
+      return {
+        list: []
+      }
+    }
+  },
+  methods: {
+    setElement (item) {
+      this.axios.post('/api/setTaskEle?models=' + item.modelid, {
+      }).then(function (respons) {
+        console.log(respons)
       })
     }
-    return mockData
   }
 }
 </script>
