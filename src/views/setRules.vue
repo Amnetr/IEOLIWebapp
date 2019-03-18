@@ -3,7 +3,7 @@
     <div class="space-left"></div>
     <div class="main-content">
       <div class="passage-container">
-        <div class="passage" v-if="passage"></div>
+        <div class="passage" v-if="passageList.length > 0"></div>
       </div>
       <div class="operation-container">
         <div class="btns-div">
@@ -16,7 +16,7 @@
           type="textarea"
           :autosize="{ minRows: 2, maxRows: 4}"
           placeholder="请输入内容"
-          v-model="textarea"
+          v-model="ruleInput"
         ></el-input>
         <el-button id="uploadBtn" size="small" class="margin-top-2rem">提交</el-button>
         <el-button size="small" class="margin-top-2rem">测试</el-button>
@@ -81,8 +81,22 @@
 export default {
   name: 'setTag',
   data () {
-    return {
-      textarea: ''
+    console.log(this.$route.params)
+    if (this.$route.params) {
+      return {
+        passageList: this.$route.params.list,
+        rules: this.$route.params.rules,
+        ruleInput: ''
+      }
+    } else {
+      this.$router.push({
+        name: 'login'
+      })
+      return {
+        ruleInput: '',
+        passageList: [],
+        rules: []
+      }
     }
   }
 }
