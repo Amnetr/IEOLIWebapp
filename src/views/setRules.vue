@@ -3,12 +3,45 @@
     <div class="space-left"></div>
     <div class="main-content">
       <div class="passage-container">
-        <div class="passage" v-if="passageList.length > 0"></div>
+        <div class="passage" v-if="passageList.length > 0">
+          <div v-for="(item,index) in passageList" :key="index">
+            <h3 style="color: #1aa094;">{{index + 1}}</h3>
+            <p>{{item.article}}</p>
+          </div>
+        </div>
       </div>
       <div class="operation-container">
         <div class="btns-div">
           <div class="nav-bar"></div>
           <span id="navTitle">已有要素规则</span>
+          <el-table :data="rules" style="width: 80%">
+            <el-table-column type="expand">
+              <template slot-scope="props">
+                <el-form label-position="left" inline class="demo-table-expand">
+                  <el-form-item label="规则 ID">
+                    <span>{{ props.row.ruleid }}</span>
+                  </el-form-item>
+                  <el-form-item label="中文描述">
+                    <span>{{ props.row.description }}</span>
+                  </el-form-item>
+                  <el-form-item label="正则表达式">
+                    <span>{{ props.row.regex }}</span>
+                  </el-form-item>
+                  <el-form-item label="要素 ID">
+                    <span>{{ props.row.modelid }}</span>
+                  </el-form-item>
+                  <el-form-item label="正确率">
+                    <span>{{ props.row.rate }}</span>
+                  </el-form-item>
+                  <el-form-item label="操作用户">
+                    <span>{{ props.row.userid }}</span>
+                  </el-form-item>
+                </el-form>
+              </template>
+            </el-table-column>
+            <el-table-column label="规则 ID" prop="ruleid"></el-table-column>
+            <el-table-column label="中文描述" prop="description" show-overflow-tooltip></el-table-column>
+          </el-table>
         </div>
       </div>
       <div id="ruleEditor" class="clear">
@@ -18,9 +51,9 @@
           placeholder="请输入内容"
           v-model="ruleInput"
         ></el-input>
-        <el-button id="uploadBtn" size="small" class="margin-top-2rem">提交</el-button>
-        <el-button size="small" class="margin-top-2rem">测试</el-button>
-        <el-button size="small" class="margin-top-2rem">下一篇</el-button>
+        <el-button id="uploadBtn" size="small" class="margin-top-2rem" @click="submitRule">提交</el-button>
+        <el-button size="small" class="margin-top-2rem" @click="ruleTest">测试</el-button>
+        <el-button size="small" class="margin-top-2rem" @click="nextPassage">下一篇</el-button>
       </div>
       <div id="tips">
         <b>书写规范：</b>
@@ -82,7 +115,7 @@ export default {
   name: 'setTag',
   data () {
     console.log(this.$route.params)
-    if (this.$route.params) {
+    if (this.$route.params.list) {
       return {
         passageList: this.$route.params.list,
         rules: this.$route.params.rules,
@@ -97,6 +130,53 @@ export default {
         passageList: [],
         rules: []
       }
+    }
+  },
+  methods: {
+    ruleTest () {
+      let passageStrings = []
+      for (let i = 0; i < this.passageList.length; i++) {
+        passageStrings.push(this.passageList[i].article)
+      }
+      this.axios.post('/api/submitresult', {
+        code: '0',
+        description: this.ruleInput,
+        article: passageStrings.join('#')
+      }).then(function (respons) {
+        console.log(respons)
+        this.$alert(respons.data, '测试结果', {
+          confirmButtonText: '确定',
+          callback: action => {
+            // 可自定义回调操作
+          }
+        })
+      }.bind(this))
+    },
+    submitRule () {
+      this.axios.post('/api/submitresult', {
+        code: '1',
+        description: this.ruleInput
+      }).then(function (respons) {
+        console.log(respons)
+        this.nextPassage()
+        this.updateRules()
+      }.bind(this))
+    },
+    nextPassage () {
+      this.axios.post('/api/page', {
+        path: 'nextpage'
+      }).then(function (respons) {
+        this.passageList = respons.data.list
+        this.ruleInput = ''
+      }.bind(this))
+    },
+    updateRules () {
+      this.axios.post('/api/page', {
+        path: 'showHandledRule',
+        modelid: this.$route.params.modelid
+      }).then(function (respons) {
+        this.rules = respons.data.Rules
+      }.bind(this))
     }
   }
 }
@@ -164,13 +244,14 @@ export default {
   height: 100%;
   flex-direction: row;
   flex-wrap: nowrap;
+  width: 80%;
 }
 
 .passage-container {
   float: left;
   width: 65%;
   background: url(../assets/bg.png);
-  height: 80%;
+  min-height: 80%;
 }
 
 .operation-container {

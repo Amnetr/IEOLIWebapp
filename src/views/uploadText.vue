@@ -7,7 +7,7 @@
     <!-- 以下为测试用上传地址 -->
     <div class="mainConatiner">
       <el-upload
-        action="https://jsonplaceholder.typicode.com/posts/"
+        action="/api/UploadTexts"
         :on-remove="handleRemove"
         :before-remove="beforeRemove"
         multiple

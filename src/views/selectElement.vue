@@ -53,10 +53,13 @@ export default {
     setElement (item) {
       this.axios.post('/api/setTaskEle?models=' + item.modelid, {
       }).then(function (respons) {
-        console.log(respons)
         this.$router.push({
           name: 'setRules',
-          params: respons.data
+          params: {
+            list: respons.data.list,
+            rules: respons.data.rules,
+            modelid: item.modelid
+          }
         })
       }.bind(this))
     }
