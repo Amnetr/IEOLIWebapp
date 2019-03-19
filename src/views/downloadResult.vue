@@ -13,10 +13,10 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55"></el-table-column>
-        <el-table-column label="序号">
-          <template slot-scope="scope">{{ scope.row.num }}</template>
+        <el-table-column label="任务 ID" width="150">
+          <template slot-scope="scope">{{ scope.row.taskid }}</template>
         </el-table-column>
-        <el-table-column prop="name" label="任务名"></el-table-column>
+        <el-table-column prop="taskdescription" label="任务描述"></el-table-column>
       </el-table>
       <div style="margin-top: 20px">
         <el-button @click="downloadSelection()" id="downloadBtn">下载</el-button>
@@ -29,27 +29,18 @@
 <script>
 export default {
   name: 'downloadResult',
-  components: {
-  },
   data () {
     return {
-      tableData: [{
-        num: '1',
-        name: '王小虎'
-      }, {
-        num: '2',
-        name: '王小虎'
-      }, {
-        num: '3',
-        name: '王小虎'
-      }],
-      multipleSelection: [],
-      dialogFormVisible: false,
-      form: {
-        description: ''
-      },
-      formLabelWidth: '80px'
+      tableData: [],
+      multipleSelection: []
     }
+  },
+  created: function () {
+    this.axios.post('/api/page', {
+      path: 'edittask'
+    }).then(function (respons) {
+      this.tableData = respons.data.list
+    }.bind(this))
   },
   methods: {
     toggleSelection (rows) {
@@ -63,12 +54,24 @@ export default {
     },
     handleSelectionChange (val) {
       this.multipleSelection = val
+    },
+    downloadSelection () {
+      console.log(this.multipleSelection)
+      let requestTemp = []
+      for (let i = 0; i < this.multipleSelection.length; i++) {
+        requestTemp.push(this.multipleSelection[i].taskid)
+      }
+      this.axios.post('/api/download', {
+        models: requestTemp.toString()
+      }).then(function (respons) {
+        console.log(respons)
+      })
     }
   }
 }
 </script>
 
-<style scope>
+<style scoped>
 .title-container {
   margin: 0.875rem 2rem;
 }

@@ -47,7 +47,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 .title-container {
   margin: .875rem 2rem;
 }

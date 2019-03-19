@@ -14,15 +14,15 @@
       >
         <el-option
           v-for="item in options"
-          :key="item.elementId"
-          :label="item.elementDescirption"
-          :value="item.elementId"
+          :key="item.modelid"
+          :label="item.modelname"
+          :value="item.modelid"
         ></el-option>
       </el-select>
       <el-table :data="tableData" style="width: 100%">
         <el-table-column prop="description" label="中文描述" width="400" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="regExp" label="正则表达式" width="400" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="accuracy" label="准确率"></el-table-column>
+        <el-table-column prop="regex" label="正则表达式" width="400" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="rate" label="准确率"></el-table-column>
       </el-table>
     </div>
   </div>
@@ -35,39 +35,24 @@ export default {
   },
   data () {
     return {
-      options: [
-        {
-          elementId: '1',
-          elementDescirption: 'ele111111'
-        },
-        {
-          elementId: '2',
-          elementDescirption: 'ele1323111'
-        },
-        {
-          elementId: '3',
-          elementDescirption: 'ele11654611'
-        }
-      ],
-      tableData: [{
-        description: '2016-05-02',
-        regExp: '王小虎xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-        accuracy: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        description: '2016-05-02',
-        regExp: '王小虎',
-        accuracy: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        description: '2016-05-02',
-        regExp: '王小虎',
-        accuracy: '上海市普陀区金沙江路 1518 弄'
-      }],
+      options: [],
+      tableData: [],
       selectedValue: ''
     }
+  },
+  created: function () {
+    this.axios.get('/api/GetTasks').then(function (respons) {
+      this.options = respons.data
+    }.bind(this))
   },
   methods: {
     selectChange (value) {
       console.log(value)
+      this.axios.post('/api/ShowHandLedText', {
+        modelid: value
+      }).then(function (respons) {
+        this.tableData = respons.data.rules
+      }.bind(this))
     }
   }
 }

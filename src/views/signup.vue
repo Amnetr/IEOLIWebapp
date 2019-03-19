@@ -85,10 +85,52 @@ export default {
   },
   methods: {
     sendmail () {
-
+      if (this.userName !== '') {
+        this.axios.post('/api/SendMail', {
+          username: this.userName
+        }).then(function (respons) {
+          if (respons.data === 'failed') {
+            this.$message.error('发送失败!')
+          } else {
+            this.$message({
+              message: '发送成功！',
+              type: 'success'
+            })
+          }
+        }.bind(this))
+      } else {
+        this.$message.error('请先输入邮箱!')
+      }
     },
     check () {
-
+      if (this.password === '' || this.repassword === '' || this.userName === '' || this.code === '') {
+        this.$message.error('信息不完善')
+      } else if (this.password !== this.repassword) {
+        this.$message.error('两次输入密码不同!')
+      } else {
+        this.axios.post('/api/Signup', {
+          code: this.code,
+          username: this.userName,
+          password: this.password,
+          actor: 1
+        }).then(function (respons) {
+          switch (respons.data) {
+            case 'existed':
+              this.$message.error('用户已存在！')
+              break
+            case 'wrongcode':
+              this.$message.error('验证码错误！')
+              break
+            case 'success': {
+              this.$message({
+                message: '注册成功！',
+                type: 'success'
+              })
+              break
+            }
+          }
+        })
+      }
     }
   }
 }
