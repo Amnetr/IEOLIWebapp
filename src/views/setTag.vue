@@ -54,6 +54,7 @@
             </div>
           </div>
         </div>
+        <el-button plain @click="autoTag" class="auto-tag">智能标注</el-button>
       </div>
     </div>
     <div class="space-right"></div>
@@ -141,11 +142,19 @@ export default {
           document.getElementById(this.tagedNode[i]).style.backgroundColor = 'initial'
         }
       }
+    },
+    autoTag () {
+      this.axios.get('/api/GetResult').then(function (respons) {
+        console.log(respons)
+      })
     }
   }
 }
 </script>
 <style scoped>
+.auto-tag {
+  margin: 1.5rem;
+}
 .start-tag {
   background-color: #1aa094;
 }
