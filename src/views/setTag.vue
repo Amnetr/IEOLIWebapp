@@ -58,6 +58,19 @@
       </div>
     </div>
     <div class="space-right"></div>
+    <el-dialog title="智能标注" :visible.sync="dialogVisible">
+      <div class="auto-tag-container">
+        <el-tooltip
+          v-for="item in autoTagList"
+          effect="dark"
+          :content="item.tag"
+          :key="item.$index"
+          placement="top"
+        >
+          <span class="passage-span">{{item.word}}</span>
+        </el-tooltip>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -80,7 +93,9 @@ export default {
         passageList: this.$route.params.list,
         selectStep: '1',
         resultData: [],
-        tagedNode: []
+        tagedNode: [],
+        dialogVisible: false,
+        autoTagList: []
       }
     } else {
       this.$router.push({
@@ -92,7 +107,9 @@ export default {
         passageList: [],
         selectStep: '',
         resultData: [],
-        tagedNode: []
+        tagedNode: [],
+        dialogVisible: false,
+        autoTagList: []
       }
     }
   },
@@ -144,14 +161,23 @@ export default {
       }
     },
     autoTag () {
+      this.dialogVisible = true
       this.axios.get('/api/GetResult').then(function (respons) {
         console.log(respons)
-      })
+        this.autoTagList = respons.data.list
+      }.bind(this))
     }
   }
 }
 </script>
 <style scoped>
+.auto-tag-container {
+  min-height: 10rem;
+  max-height: 30rem;
+  border: 1px solid #c9c9c998;
+  padding: 0.5rem;
+  overflow: scroll;
+}
 .auto-tag {
   margin: 1.5rem;
 }
